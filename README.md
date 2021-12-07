@@ -61,6 +61,7 @@ php bin/magento setup:static-content:deploy -f
    
    ```
    php bin/magento cache:clean
+   ```
 ## Donation
 
 If this project help you reduce time to develop, you can give me a cup of coffee :) 
