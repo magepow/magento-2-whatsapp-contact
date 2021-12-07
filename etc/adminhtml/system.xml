@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magepow" translate="label" class="magepow" sortOrder="100">
+            <label></label>
+        </tab>
+        <section id="magepow_whatsappcontact" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>WhatsApp Contact</label>
+            <tab>magepow</tab>
+            <resource>Magepow_WhatsappContact::whatsappcontact_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled/Disable</label>
+                    <comment><![CDATA[enable or disable module whats app contact]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="enable_in" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable WhatsApp Contact Type</label>
+                    <comment><![CDATA[Contact default or Agent person whatsapp contact]]></comment>
+                    <source_model>Magepow\WhatsappContact\Model\Config\Source\Devices</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="default_message" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Chat Message</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="button_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Button Type</label>
+                    <comment><![CDATA[Choose type chat default is number config on contact mobile number or whatsapp agents person.]]></comment>
+                    <source_model>Magepow\WhatsappContact\Model\Config\Source\Button</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="mobile_number" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Contact Mobile Number</label>
+                    <comment><![CDATA[Enter number with country code.(+1) for United States.]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                        <field id="button_type" separator=",">icon</field>
+                    </depends>
+                </field>
+
+                <field id="chatboxtext" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Button Text</label>
+                    <comment><![CDATA[The text will be displayed on contact button.Maximum character limit is 25 and each space will be counted as a character.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                        <field id="button_type" separator=",">chatbox</field>
+                    </depends>
+                </field>
+
+                <field id="text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Button Hover Text</label>
+                    <comment><![CDATA[Text when hover button icon whatsapp.]]></comment>
+                    <comment>
+                        <![CDATA[The text will get displayed when contact button will be hovered. Maximum character limit is 20 and each space will be counted as a character.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                        <field id="button_type" separator=",">icon</field>
+                    </depends>
+                    <validate>validate-length maximum-length-20</validate>
+                </field>
+                <field id="background_color" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Button Background Color</label>
+                    <comment><![CDATA[Background button whatsapp contact ddefault is #09e343.]]></comment>
+                    <frontend_model>Magepow\WhatsappContact\Block\Color</frontend_model>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="icon_color" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Icon Color</label>
+                    <comment><![CDATA[Text color default is #ffffff.]]></comment>
+                    <validate>required-entry</validate>
+                    <frontend_model>Magepow\WhatsappContact\Block\Color</frontend_model>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="message" translate="label" type="textarea" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Text on popup</label>
+                    <comment><![CDATA[Text on popup WhatsApp contact agents person.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                        <field id="button_type" separator=",">chatbox</field>
+                    </depends>
+                </field>
+                <field id="top" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Top Position</label>
+                    <comment><![CDATA[Using pixels. Leave blank to unset the position.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="right" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Right Position</label>
+                    <comment><![CDATA[Using pixels. Default config is 25px.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="bottom" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Bottom Position</label>
+                    <comment><![CDATA[Use pixel. Default config is 25px.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="left" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Left Position</label>
+                    <comment><![CDATA[Using pixels. Leave blank to unset the position.]]></comment>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="close" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Close Button</label>
+                    <comment><![CDATA[Enabled is shows x close icon and button whatsapp.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <depends>
+                        <field id="magepow_whatsappcontact/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

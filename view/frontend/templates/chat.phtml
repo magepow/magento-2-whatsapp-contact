@@ -1,0 +1,249 @@
+<?php 
+    $helper         = $this->helper('Magepow\WhatsappContact\Helper\Data');
+    $phoneNumber    = $helper->getConfigModule('general/mobile_number');
+    $defaultMessage = $helper->getConfigModule('general/default_message');
+    $enable_in      = $helper->getConfigModule('general/enable_in');
+    $devices        = $helper->getDeviceType();
+    $closeButton    = $helper->getConfigModule('general/close');
+    $buttonType     = $helper->getConfigModule('general/button_type');
+    $textHover      = $helper->getConfigModule('general/text');
+    $chatDefault    = $helper->getChat();
+    $chatTop        = $helper->getConfigModule('general/top');
+    $chatRight      = $helper->getConfigModule('general/right');
+    $chatBottom     = $helper->getConfigModule('general/bottom');
+    $message        = $helper->getConfigModule('general/message');
+    $chatLeft       = $helper->getConfigModule('general/left');
+    $bgColor        = $helper->getConfigModule('general/background_color');
+    $bgColor        = str_replace('#','',$bgColor);
+    $bgColor        = '#'.$bgColor;
+    $inconColor     = $helper->getConfigModule('general/icon_color');
+    $inconColor     = str_replace('#','',$inconColor);
+    $inconColor     = '#'.$inconColor;
+    $chatBoxText    = $helper->getConfigModule('general/chatboxtext');
+    $chat           = $helper->positionButton();
+
+    if ($chatTop <= '0' || $chatTop == '') :
+        $chatTop = '';
+    endif;
+    if ($chatRight <= '0' || $chatRight == '') :
+        $chatRight = '';
+    endif;
+    if ($chatBottom <= '0') :
+        $chatBottom = '25';
+    endif;
+    if (($chatLeft <= '0') && ($chatRight <= '0')) :
+        $chatRight = '25';
+    endif;
+?>
+<div id="wa_contact">
+    <?php if ($closeButton && $buttonType == "icon") : ?>
+        <span id="closeWhatsappButton" title="Close WhatsApp Contact"></span>
+    <?php endif; ?>
+    <span id="wa_contact_title" class="wa_contact_title"><?php echo $textHover; ?></span>
+    <?php if ($devices == "mobile") : ?>
+        <a href="https://wa.me/<?php echo $phoneNumber; ?>/?text=<?php echo $defaultMessage; ?>"
+           target="_blank" data-action="share/whatsapp/share" id="wa_chat"></a>
+    <?php elseif ($devices == "desktop") : ?>
+    <a href="https://web.whatsapp.com/send?l=en&phone=<?php echo $chatDefault; ?>" target="_blank"
+       data-action="share/whatsapp/share" id="wa_chat">
+        <?php endif; ?>
+        <span id="wa_icon"></span>
+    </a>
+</div>
+
+<div id="whtspbox">
+    <div class="whatsappBox <?php if ($chatTop != '') : echo "whatsappBox_top"; elseif ($chatBottom != ''): echo "whatsappBox_bottom"; endif; ?>"
+         id="whatsappBox">
+        <div class="whatsappDescription" style="background-color: <?php echo $bgColor?>"><p><?php echo $message; ?></p></div>
+        <span class="fa_whatsapp fa-whatsappClose whatsappClose"></span>
+        <div class="whatsappAdmin">
+            <?php
+            foreach ($block->getUrlKey() as $url):
+                if ($url['url'] != '' || $url['url'] != null):?>
+                    <a href="<?php echo $url['url'] ?>" target="_blank" data-action="share/whatsapp/share"
+                       class="whatsappAccount">
+                        <?php if ($url['image'] != '' && $url['image'] != null): ?>
+                            <div class="whatsappImage"
+                                 style="background-image: url('<?php echo $url['image'] ?>')"></div>
+                        <?php else: ?>
+                            <div class="whatsappImage"></div>
+                        <?php endif; ?>
+                        <?php if ($url['name'] == '' || $url['name'] == null):
+                            $url['name'] = 'Chat with Us';
+                        endif; ?>
+                        <div class="whatsappAdminInfo">
+                            <span class="span_name"><?php echo $url['name']; ?></span>
+                            <span class="span_default"><?php echo $url['department']; ?></span>
+                            <span class="span_default"><?php echo $url['default_msg']; ?></span>
+                        </div>
+                    </a>
+                <?php endif;
+            endforeach; ?>
+        </div>
+    </div>
+    <?php if ($closeButton) : ?>
+        <span id="closeWhatsappButtonBox" title="Close WhatsApp Contact"></span>
+    <?php endif; ?>
+    <div class="whatsappToggle" id="whatsappToggle" style="background-color: <?php echo $bgColor; ?>">
+        <span class="fa_whatsapp fa-whatsapp" style="color: <?php echo $inconColor; ?>"></span>
+        <span class="whatsappText"><?php echo $chatBoxText ; ?></span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $("#closeWhatsappButton").click(function () {
+            $("#wa_contact").css("display", "none");
+        });
+        $(document).ready(function () {
+            var devices = '<?php echo $devices;?>';
+            var enable_in = '<?php echo $enable_in;?>';
+            var buttonType = '<?php echo $buttonType;?>';
+
+            if (buttonType === 'icon') {
+                jQuery(".whatsappToggle").css("display", "none");
+
+                if ((devices === "mobile" && enable_in !== '0') || (devices === 'desktop' && enable_in !== '1')) {
+                    setStyle();
+                }
+
+                function setStyle() {
+                    $("#wa_contact").addClass('wa_contact');
+                    $("#wa_contact").css({
+                        'top': '<?php echo $chatTop;?>px',
+                        'right': '<?php echo $chatRight;?>px',
+                        'bottom': '<?php echo $chatBottom;?>px',
+                        'left': '<?php echo $chatLeft;?>px'
+                    });
+                    var width = $(window).width() / 2;
+                    var title_left = '<?php echo $chatLeft;?>';
+                    var title_right = '<?php echo $chatRight;?>';
+                    $('#wa_contact_title').css("textWrap", "none");
+                    if (title_left !== '' && title_left > width) {
+                        $('#wa_contact_title').css({
+                            'top': '<?php echo $chat['title_top'];?>px',
+                            'right': '<?php echo $chat['title_left'];?>px',
+                            'left': ''
+                        });
+                    } else if (title_right !== '' && title_right > width) {
+                        $('#wa_contact_title').css({
+                            'top': '<?php echo $chat['title_top'];?>px',
+                            'right': '',
+                            'left': '<?php echo $chat['title_right'];?>px'
+                        });
+                    } else {
+                        $('#wa_contact_title').css({
+                            'top': '<?php echo $chat['title_top'];?>px',
+                            'right': '<?php echo $chat['title_left'];?>px',
+                            'left': '<?php echo $chat['title_right'];?>px'
+                        });
+                    }
+
+                    $('#wa_chat').addClass('whatsapp_a');
+                    $('#wa_chat').css({'background-color': '<?php echo $bgColor;?>'});
+                    $('#wa_icon').addClass('fa_whatsapp fa-whatsapp');
+                    $('#wa_icon').css('color', '<?php echo $inconColor;?>');
+                    var close = '<?php echo $closeButton?>';
+                    if (close === '1') {
+                        $('#closeWhatsappButton').addClass('closeWhatsappButton');
+                        if (devices === "mobile") {
+                            $('#closeWhatsappButton').addClass('closeButtonMobileImage');
+                            $('#closeWhatsappButton').css({'right': '<?php echo $chat['close_right_mobile'];?>px'});
+                        } else if (devices === "desktop") {
+                            $('#closeWhatsappButton').addClass('closeButtonWebImage');
+                            $('#closeWhatsappButton').css({'right': '<?php echo $chat['close_right'];?>px'});
+                        }
+                        $('#closeWhatsappButton').css({
+                            'top': '<?php echo $chat['close_top'];?>px',
+                            'bottom': '<?php echo $chat['close_bottom'];?>px',
+                            'left': '<?php echo $chat['close_left'];?>px'
+                        });
+                    }
+                }
+            } else if (buttonType === 'chatbox') {
+                jQuery("#whtspbox").css("display", "box");
+                jQuery("#wa_contact").css("display", "none");
+                jQuery(".whatsappToggle").click(function () {
+                    jQuery("#whatsappBox").toggleClass('whatsapp_show');
+
+                });
+                jQuery("#closeWhatsappButtonBox").click(function () {
+                    jQuery(".whatsappToggle").css("display", "none");
+                    jQuery("#closeWhatsappButtonBox").css("display", "none");
+                });
+                jQuery(".whatsappClose").click(function () {
+                    jQuery("#whatsappBox").removeClass('whatsapp_show');
+                });
+                if ((devices === "mobile" && enable_in !== '0') || (devices === 'desktop' && enable_in !== '1')) {
+                    setChatBox();
+                }
+
+                function setChatBox() {
+                    jQuery(".whatsappToggle").css("display", "flex");
+                    jQuery('#whatsappToggle').css({
+                        'top': '<?php echo $chatTop;?>px',
+                        'left': '<?php echo $chatLeft;?>px',
+                        'bottom': '<?php echo $chatBottom;?>px',
+                        'right': '<?php echo $chatRight;?>px'
+                    });
+                    jQuery('#whatsappBox').css({
+                        'top': '<?php echo $chat['chat_top'];?>px',
+                        'left': '<?php echo $chat['chat_left'];?>px',
+                        'bottom': '<?php echo $chat['chat_bottom'];?>px',
+                        'right': '<?php echo $chat['chat_right'];?>px'
+                    });
+                    var chat_top = '<?php echo $chat['chat_top'];?>';
+                    var chat_right = '<?php echo $chat['chat_right'];?>';
+                    if (chat_top !== '') {
+                        jQuery("#whatsappBox").addClass("fa-caret-up");
+                        if (chat_right !== '' && chat_right > '0') {
+                            jQuery("#whtspbox").append('<style>.fa-caret-up:before{right: 22px;}</style>');
+                        } else {
+                            jQuery("#whtspbox").append('<style>.fa-caret-up:before{left: 22px;}</style>');
+                        }
+                    } else {
+                        jQuery("#whatsappBox").addClass("fa-caret-down");
+                        if (chat_right !== '' && chat_right > '0') {
+                            jQuery("#whtspbox").append('<style>.fa-caret-down:after{right: 22px;}</style>');
+                        } else {
+                            jQuery("#whtspbox").append('<style>.fa-caret-down:after{left: 22px;}</style>');
+                        }
+                    }
+                    var close = '<?php echo $closeButton?>';
+                    if (close === '1') {
+                        jQuery('#closeWhatsappButtonBox').addClass('closeWhatsappButton');
+                        var close_right = '<?php echo $chatRight;?>';
+                        var close_right_mobile = '';
+                        var close_left = '';
+                        if (close_right !== '' && close_right > '0') {
+                            close_right = parseInt('<?php echo $chatRight;?>') - 5;
+                            close_right_mobile = parseInt('<?php echo $chatRight;?>') - 10;
+                        } else {
+                            close_right = '';
+                            close_left = parseInt('<?php echo $chatLeft;?>') + 44 + parseInt(jQuery("#whatsappToggle").width());
+                        }
+                        if (devices === "mobile") {
+                            jQuery('#closeWhatsappButtonBox').addClass('closeButtonMobileImage');
+                            jQuery('#closeWhatsappButtonBox').css({'right': close_right_mobile + 'px'});
+                        } else if (devices === "desktop") {
+                            jQuery('#closeWhatsappButtonBox').addClass('closeButtonWebImage');
+                            jQuery('#closeWhatsappButtonBox').css({'right': close_right + 'px'});
+                        }
+                        var close_top = '<?php echo $chatTop;?>';
+                        if (close_top !== '' && close_top > '0') {
+                            close_top = parseInt('<?php echo $chatTop;?>') - 3;
+                        } else {
+                            close_top = '';
+                            var close_bottom = parseInt('<?php echo $chatBottom;?>') + 38;
+                        }
+                        jQuery('#closeWhatsappButtonBox').css({
+                            'top': close_top + 'px',
+                            'bottom': close_bottom + 'px',
+                            'left': close_left + 'px'
+                        });
+                    }
+                }
+            }
+        });
+    });
+</script>

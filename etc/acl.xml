@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magepow_WhatsappContact::whatsappcontact" title="WhatsappContact" sortOrder="20">
+                    <resource id="Magepow_WhatsappContact::whatsappcontact_grid" title="WhatsappContact Grid" sortOrder="10"/>
+                    <resource id="Magepow_WhatsappContact::whatsappcontact_configuration" title="Configuration" sortOrder="30"/>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magepow_WhatsappContact::whatsappcontact_config" title="Whatsapp Contact"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magepow_whatsappcontact>
+            <general>
+                <enabled>1</enabled>
+                <enable_in>0</enable_in>
+                <text>WhatsApp Contact</text>
+                <background_color>09e343</background_color>
+                <icon_color>ffffff</icon_color>
+                <bottom>25</bottom>
+                <right>25</right>
+                <animation>none</animation>
+                <close>0</close>
+            </general>
+        </magepow_whatsappcontact>
+    </default>
+</config>
