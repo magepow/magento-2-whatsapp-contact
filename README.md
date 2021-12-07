@@ -12,9 +12,9 @@ php bin/magento setup:static-content:deploy -f
 
 ## 2. Look in Frontend
 ### Look in frontend button type icon
-![widget-img](https://github.com/magiccart/magento2-whats-app-contact/blob/master/media/frontend_button_type_icon.jpg)
+![widget-img](https://github.com/magepow/magento-2-whats-app-contact/blob/master/media/frontend_button_type_icon.png)
 ### Look in frontend button type chat box
-![widget-img](https://github.com/magiccart/magento2-whats-app-contact/blob/master/media/frontend_button_type_chatbox.jpg)
+![widget-img](https://github.com/magepow/magento-2-whats-app-contact/blob/master/media/frontend_button_type_chatbox.png)
 ## 3. Highlight Features
 - Easy to Enable/Disable module anytime
 - Use Magento 2 WhatsApp Contact extension by MageComp to let your customers quickly connect with you just with a single button click.
@@ -28,9 +28,9 @@ php bin/magento setup:static-content:deploy -f
   `Login to Magento admin > Stores > Configuration > Magepow > WhatsApp Contact > Configuration > Enable > Choose Yes to enable the module.`
   Or `Login to Magento admin > Magepow > Configuration.`
   #### Type Icon config
-  ![Image of Magento admin config](https://github.com/magepow/magento2-whats-app-contact/blob/master/media/backend_config.png)
+  ![Image of Magento admin config](https://github.com/magepow/magento-2-whats-app-contact/blob/master/media/backend_config.png)
   #### Type chat box config
-  ![Image of Magento admin config](https://github.com/magepow/magento2-whats-app-contact/blob/master/media/backend_config_chatbox.png)
+  ![Image of Magento admin config](https://github.com/magepow/magento-2-whats-app-contact/blob/master/media/backend_config_chatbox.png)
    In Admin we set: 
    * **Button Type**: Choose type chat default is number config on contact mobile number or whatsapp agents person.
    * **Button Text**: When choose button type will display text button on front end.
@@ -49,7 +49,7 @@ php bin/magento setup:static-content:deploy -f
    ### 4.2 Manage WhatsApp chat
    To create manager whats app on Button type chatbox.
    `Login to Magento admin > Magepow > Manage WhatsApp Chat > Add New.`
-   ![Image of Magento admin config](https://github.com/magepow/magento2-whats-app-contact/blob/master/media/form_manager.png)
+   ![Image of Magento admin config](https://github.com/magepow/magento-2-whats-app-contact/blob/master/media/form_manager.png)
    * **Name**: Name of Manager whatsApp.
    * **Department Name**: Department name of manager whatsApp Contact.
    * **Mobile Number**: Enter number with country code. (+1) for United States.
