@@ -1,5 +1,5 @@
 {
-  "name": "magepow/whatsapp-conatct",
+  "name": "magepow/whatsappcontact",
   "description": "Magento 2 WhatsApp Contact is an extension to show up the Whatsapp button chat on the website.",
   "require": {
     "magepow/core": "^1.0.3"
