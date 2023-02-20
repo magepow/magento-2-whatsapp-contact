@@ -34,7 +34,6 @@ class WhatsappContact extends \Magento\Framework\View\Element\Template
    
     public function getUrlKey()
     {
-        $getDefaultMessage = $this->helper->getConfigModule('general/default_message');
         $data = [];
 
         try {
@@ -46,9 +45,9 @@ class WhatsappContact extends \Magento\Framework\View\Element\Template
                     $number = '+' . $account['person_number'];
 
                     if (preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"])) {
-                        $url['url'] = "https://wa.me/".$number."/?text=".$getDefaultMessage;
+                        $url['url'] = "https://wa.me/".$number."/?text=".$account['default_message'];
                     } else {
-                        $url['url'] = "https://web.whatsapp.com/send?l=en&phone=" . $number . "&text=" . $getDefaultMessage;
+                        $url['url'] = "https://web.whatsapp.com/send?l=en&phone=" . $number . "&text=" . $account['default_message'];
                     }
                     $url['name'] = $account['person_name'];
                     $url['image'] = $account['person_image'];
