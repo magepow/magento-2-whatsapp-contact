@@ -1,4 +1,4 @@
-# Magento 2 Extention Whats App Contact
+# Magento 2 Extention Whatsapp Contact
 **Whatsapp Extension Magento extension** (Magepow Whatsapp Contact Extension) WhatsApp is a widely used messaging app, easy to use, and is the best choice for instant communication. WhatsApp Contact for Magento 2 lets the visitors instantly contact the store admin by clicking the WhatsApp contact button kept on the site.
 ## 1. How to install Magento 2 Whatsapp Contact
 ### ✓ Install Magiccart Whatsapp Contact via composer (recommend)
