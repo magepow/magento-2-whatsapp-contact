@@ -5,14 +5,15 @@
 ## 1. How to install Magento 2 Whatsapp Contact
 ### ✓ Install Magiccart Whatsapp Contact via composer (recommend)
 Run the following command in Magento 2 root folder:
-[![Latest Stable Version](https://poser.pugx.org/magepow/whatsappcontact/v/stable)](https://packagist.org/packages/magepow/whatsappcontact)
-[![Total Downloads](https://poser.pugx.org/magepow/whatsappcontact/downloads)](https://packagist.org/packages/magepow/whatsappcontact)
-[![Daily Downloads](https://poser.pugx.org/magepow/whatsappcontact/d/daily)](https://packagist.org/packages/magepow/whatsappcontact)
+
 ```
 composer require magepow/whatsappcontact
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy -f
 ```
+[![Latest Stable Version](https://poser.pugx.org/magepow/whatsappcontact/v/stable)](https://packagist.org/packages/magepow/whatsappcontact)
+[![Total Downloads](https://poser.pugx.org/magepow/whatsappcontact/downloads)](https://packagist.org/packages/magepow/whatsappcontact)
+[![Daily Downloads](https://poser.pugx.org/magepow/whatsappcontact/d/daily)](https://packagist.org/packages/magepow/whatsappcontact)
 
 ## 2. Look in Frontend
 ### Look in frontend button type icon
